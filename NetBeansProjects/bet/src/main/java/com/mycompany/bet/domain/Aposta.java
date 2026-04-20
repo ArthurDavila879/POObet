@@ -80,4 +80,9 @@ public class Aposta {
     public int getIdAposta() {
         return idAposta;
     }
+
+    public Jogo getJogo(int id) {
+       return jogo.getJogoById(id);
+    }
+
 }

@@ -54,8 +54,15 @@ public int resultado(){
     }
     return 0;
 }
+    public Jogo getJogoById(int id) {
+        return jogos.get(id-1);
 
+    }
     public int getIdJogo() {
         return idJogo;
+    }
+
+    public double getApostaMax() {
+        return apostaMax;
     }
 }

@@ -46,13 +46,14 @@ public class Jogador {
                 case 2:
                     int id = InOut.leInt("Insira o id do jogo");
                     int valor = InOut.leInt("Insira o valor da aposta");
-                    if (!credito.isBloqueado() && valor <= credito.getSaldo()) {
+                    if (!credito.isBloqueado() && valor <= credito.getSaldo() && valor <= listaDeApostas.getJogo(id).getApostaMax()) {
                         credito.setSaldo(credito.getSaldo()-valor);
                         Aposta apostado = new Aposta(true, valor, 1);
                         apostado.apostarJogo(id);
                         minhasApostas.add(apostado);
                         break;
                     }
+                    else InOut.MsgDeAviso("Erro","Aposta invalida");
                     break;
                 case 3:
                     for (Aposta a : minhasApostas) {
