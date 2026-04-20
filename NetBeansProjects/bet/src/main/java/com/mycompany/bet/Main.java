@@ -21,7 +21,7 @@ public class Main {
         aposta.setJogo(jogo);
         jogador.setCredito(credito);
 
-
+      jogador.cadastrar();
       jogador.menu();
 
 

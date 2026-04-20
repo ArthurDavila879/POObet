@@ -28,12 +28,14 @@ public class Jogador {
     public void menu() {
         int opcao = 0;
 
-        while (opcao != 5) {
+        while (opcao != 7) {
             opcao = InOut.leInt("1: Ver as apostas disponíveis\n" +
                     "2: Apostar \n" +
                     "3: Ver minhas apostas\n" +
                     "4: Resultado\n" +
-                    "5: Sair");
+                    "5: Excluir apostas\n" +
+                    "6: Usuario\n" +
+                    "7: Sair");
 
             switch (opcao) {
                 case 1:
@@ -59,13 +61,26 @@ public class Jogador {
                     break;
                 case 4:
                     for (Aposta a : minhasApostas) {
-                        this.credito.setSaldo(this.credito.getSaldo() + (a.resultadoDaAposta()*a.getValorAposta())) ;
-                        if (a.resultadoDaAposta() == 2){
-                            InOut.MsgDeInformacao("Aposta","Aposta ganha, seu saldo atual é "+this.credito.getSaldo());
+                        int resultadoDaAposta = a.resultadoDaAposta();
+                        this.credito.setSaldo(this.credito.getSaldo() + (resultadoDaAposta*a.getValorAposta())) ;
+                        if (resultadoDaAposta == 2){
+                            InOut.MsgDeInformacao("Aposta","A Aposta do jogo "+ a.getIdAposta()+ " foi vencida, seu saldo atual é "+this.credito.getSaldo());
                         }
-                        else InOut.MsgDeInformacao("Aposta","Aposta perdida, seu saldo atual é "+this.credito.getSaldo());
+                        else InOut.MsgDeInformacao("Aposta","A Aposta do jogo "+ a.getIdAposta()+" foi perdida, seu saldo atual é "+this.credito.getSaldo());
+
                     }
+                    minhasApostas.clear();
                  break;
+                case 5:
+                    int id_remove = InOut.leInt("Insira o id do jogo que você quer remover");
+                    for(Aposta a : minhasApostas){
+                        if(a.getIdAposta() == id_remove){
+                            a.excluirAposta(id_remove);
+                            minhasApostas.remove(a);
+                        }
+                    }
+                case 6:
+                    InOut.MsgDeInformacao("Usuario","Nome: "+this.nome+" "+this.sobrenome+"\nApelido: "+this.apelido+"\nSaldo: "+credito.getSaldo()+"\nCPF: "+this.cpf+"\nNacionalidade: "+this.nacionalidade);
             }
 
         }

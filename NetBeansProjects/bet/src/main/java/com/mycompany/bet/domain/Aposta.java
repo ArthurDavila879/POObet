@@ -52,6 +52,11 @@ public class Aposta {
     jogo.imprimirJogos();
 }
 
+    public void excluirAposta(int idjogo){
+        jogosApostados.removeIf(jogo -> jogo.getIdJogo() == idjogo);
+        InOut.MsgDeInformacao("Aviso","Aposta excluida");
+    }
+
   public int resultadoDaAposta(){
         for (Jogo j: jogosApostados){
             if (j.resultado() ==1){
@@ -70,5 +75,9 @@ public class Aposta {
 
     public double getValorAposta() {
         return valorAposta;
+    }
+
+    public int getIdAposta() {
+        return idAposta;
     }
 }
