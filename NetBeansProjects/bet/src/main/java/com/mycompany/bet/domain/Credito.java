@@ -21,5 +21,16 @@ public class Credito {
     public void imprimirInfo(){
 
     }
-    
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
 }

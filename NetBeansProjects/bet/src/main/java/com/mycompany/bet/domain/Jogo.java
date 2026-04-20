@@ -40,8 +40,8 @@ public static List<Jogo> jogos = List.of(
 
         }
     }
-    public void imprimirJogo(){
-        InOut.MsgDeInformacao("Jogos","ID: "+this.idJogo+"\nDescrição: "+descritivo+"\nAposta maxima: "+apostaMax+"\nPremio maximo: "+premioMax);
+    public void imprimirJogo(Jogo j){
+        InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax);
     }
     
 public int resultado(){

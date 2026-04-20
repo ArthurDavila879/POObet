@@ -12,7 +12,8 @@ import java.util.List;
  * @author alunolab10
  */
 public class Aposta {
-    
+    private static int contadorId = 1;
+
     private int idAposta;
     private boolean confirmado;
     private double valorAposta;
@@ -24,14 +25,15 @@ public class Aposta {
     public Aposta() {
     }
 
-    public Aposta(int idAposta, boolean confirmado, double valorAposta, int repetir) {
-        this.idAposta = idAposta;
+    public Aposta(boolean confirmado, double valorAposta, int repetir) {
+        this.idAposta = contadorId++;
         this.confirmado = confirmado;
         this.valorAposta = valorAposta;
         this.repetir = repetir;
     }
     
     public void apostarJogo(int idJogo){
+
         for (Jogo j: Jogo.jogos){
             if (j.getIdJogo()== idJogo){
                jogosApostados.add(j);
@@ -40,22 +42,33 @@ public class Aposta {
         }
     }
     public void verApostas(){
-        for (Jogo j: Jogo.jogos){
-            j.imprimirJogo();
+        for (Jogo j: jogosApostados){
+            j.imprimirJogo(j);
         }
+        InOut.MsgDeInformacao("Aposta","Valor apostado:" +this.valorAposta);
     }
     
     public void consultarJogos(){
     jogo.imprimirJogos();
 }
 
-    public void valorApostado() {
-        InOut.MsgDeInformacao("Valor ","Valor apostado: "+this.valorAposta ); 
-    }
+  public int resultadoDaAposta(){
+        for (Jogo j: jogosApostados){
+            if (j.resultado() ==1){
+                return 2;
+            }
+
+        }
+      return 0;
+  }
 
 
 
     public void setJogo(Jogo jogo) {
         this.jogo = jogo;
+    }
+
+    public double getValorAposta() {
+        return valorAposta;
     }
 }
