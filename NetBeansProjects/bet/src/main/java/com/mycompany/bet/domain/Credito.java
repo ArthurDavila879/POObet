@@ -5,7 +5,7 @@
 package com.mycompany.bet.domain;
 
 public class Credito {
-    private double saldo;
+    private double saldo = 500;
     private String validade;
     private String moeda;
     private boolean bloqueado;
@@ -18,6 +18,8 @@ public class Credito {
         this.moeda = moeda;
         this.bloqueado = bloqueado;
     }
-    
+    public void imprimirInfo(){
+
+    }
     
 }

@@ -17,7 +17,9 @@ public class Aposta {
     private boolean confirmado;
     private double valorAposta;
     private int repetir;
-    private List<Jogo> listaDeJogos = new ArrayList<>();
+    private Jogo jogo;
+
+    public List<Jogo> jogosApostados = new ArrayList<>();
 
     public Aposta() {
     }
@@ -29,16 +31,31 @@ public class Aposta {
         this.repetir = repetir;
     }
     
-    
-    
-    public void consultarJogos(){
-     for(Jogo j: listaDeJogos){
-         InOut.MsgDeInformacao("Jogos","Descrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax);
+    public void apostarJogo(int idJogo){
+        for (Jogo j: Jogo.jogos){
+            if (j.getIdJogo()== idJogo){
+               jogosApostados.add(j);
+               InOut.MsgDeAviso("Aviso","Jogo apostado");
+            }
+        }
+    }
+    public void verApostas(){
+        for (Jogo j: Jogo.jogos){
+            j.imprimirJogo();
+        }
     }
     
+    public void consultarJogos(){
+    jogo.imprimirJogos();
 }
 
     public void valorApostado() {
         InOut.MsgDeInformacao("Valor ","Valor apostado: "+this.valorAposta ); 
+    }
+
+
+
+    public void setJogo(Jogo jogo) {
+        this.jogo = jogo;
     }
 }

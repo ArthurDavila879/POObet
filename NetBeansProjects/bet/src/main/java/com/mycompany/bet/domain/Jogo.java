@@ -16,7 +16,7 @@ public class Jogo {
     double premioMax;
     double odd = 2;
     
-List<Jogo> jogos = List.of(
+public static List<Jogo> jogos = List.of(
     new Jogo(1,"Flamengo vai ganhar do Palmeiras?", 500, 2500),
     new Jogo(2,"Lakers vai ganhar do Warriors?", 300, 1800),
     new Jogo(3,"FURIA vai ganhar da NAVI (CS2)?", 200, 1500),
@@ -24,7 +24,7 @@ List<Jogo> jogos = List.of(
     new Jogo(5,"Real Madrid vai ganhar do Manchester City?", 600, 3500)
 );
 
-    
+
     public Jogo(){}
     
     public Jogo(int idJogo, String descritivo, double apostaMax, double premioMax){
@@ -32,6 +32,16 @@ List<Jogo> jogos = List.of(
         this.descritivo = descritivo;
         this.apostaMax = apostaMax;
         this.premioMax = premioMax;
+    }
+
+    public void imprimirJogos(){
+        for (Jogo j: jogos){
+            InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax);
+
+        }
+    }
+    public void imprimirJogo(){
+        InOut.MsgDeInformacao("Jogos","ID: "+this.idJogo+"\nDescrição: "+descritivo+"\nAposta maxima: "+apostaMax+"\nPremio maximo: "+premioMax);
     }
     
 public int resultado(){
@@ -44,7 +54,8 @@ public int resultado(){
     }
     return 0;
 }
-        
-    
-        
+
+    public int getIdJogo() {
+        return idJogo;
+    }
 }

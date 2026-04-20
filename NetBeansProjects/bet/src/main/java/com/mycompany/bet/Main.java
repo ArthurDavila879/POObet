@@ -13,8 +13,13 @@ public class Main {
         Jogador jogador = new Jogador();
         Aposta aposta = new Aposta();
         Jogo jogo = new Jogo();
-        
-        jogador.listaDeApostas.add(aposta);
-        jogador.menu();
+
+        jogador.getListaDeApostas().add(aposta);
+        aposta.setJogo(jogo);
+
+
+      jogador.menu();
+
+
     }
 }
