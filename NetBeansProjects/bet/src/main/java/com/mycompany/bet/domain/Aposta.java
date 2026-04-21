@@ -45,7 +45,7 @@ public class Aposta {
         for (Jogo j: jogosApostados){
             j.imprimirJogo(j);
         }
-        InOut.MsgDeInformacao("Aposta","Valor apostado:" +this.valorAposta);
+        InOut.MsgDeInformacao("Aposta","Valor apostado: " +this.valorAposta);
     }
     
     public void consultarJogos(){
@@ -57,10 +57,10 @@ public class Aposta {
         InOut.MsgDeInformacao("Aviso","Aposta excluida");
     }
 
-  public int resultadoDaAposta(){
+  public double resultadoDaAposta(){
         for (Jogo j: jogosApostados){
             if (j.resultado() ==1){
-                return 2;
+                return j.odd;
             }
 
         }

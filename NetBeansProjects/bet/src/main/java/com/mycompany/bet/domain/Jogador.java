@@ -4,10 +4,7 @@
  */
 package com.mycompany.bet.domain;
 
-import javax.annotation.processing.Generated;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -26,15 +23,15 @@ public class Jogador {
     public List<Aposta> minhasApostas = new ArrayList<>();
 
     public void menu() {
-        int opcao = 0;
-
-        while (opcao != 7) {
+        int opcao;
+        boolean loop = true;
+        while (loop) {
             opcao = InOut.leInt("1: Ver as apostas disponíveis\n" +
                     "2: Apostar \n" +
                     "3: Ver minhas apostas\n" +
                     "4: Resultado\n" +
                     "5: Excluir apostas\n" +
-                    "6: Usuario\n" +
+                    "6: Usuário\n" +
                     "7: Sair");
 
             switch (opcao) {
@@ -47,13 +44,12 @@ public class Jogador {
                     int id = InOut.leInt("Insira o id do jogo");
                     int valor = InOut.leInt("Insira o valor da aposta");
                     if (!credito.isBloqueado() && valor <= credito.getSaldo() && valor <= listaDeApostas.getJogo(id).getApostaMax()) {
-                        credito.setSaldo(credito.getSaldo()-valor);
+                        credito.setSaldo(credito.getSaldo() - valor);
                         Aposta apostado = new Aposta(true, valor, 1);
                         apostado.apostarJogo(id);
                         minhasApostas.add(apostado);
                         break;
-                    }
-                    else InOut.MsgDeAviso("Erro","Aposta invalida");
+                    } else InOut.MsgDeAviso("Erro", "Aposta invalida");
                     break;
                 case 3:
                     for (Aposta a : minhasApostas) {
@@ -62,49 +58,57 @@ public class Jogador {
                     break;
                 case 4:
                     for (Aposta a : minhasApostas) {
-                        int resultadoDaAposta = a.resultadoDaAposta();
-                        this.credito.setSaldo(this.credito.getSaldo() + (resultadoDaAposta*a.getValorAposta())) ;
-                        if (resultadoDaAposta == 2){
-                            InOut.MsgDeInformacao("Aposta","A Aposta do jogo "+ a.getIdAposta()+ " foi vencida, seu saldo atual é "+this.credito.getSaldo());
-                        }
-                        else InOut.MsgDeInformacao("Aposta","A Aposta do jogo "+ a.getIdAposta()+" foi perdida, seu saldo atual é "+this.credito.getSaldo());
+                        double resultadoDaAposta = a.resultadoDaAposta();
+                        this.credito.setSaldo(this.credito.getSaldo() + (resultadoDaAposta * a.getValorAposta()));
+                        if (resultadoDaAposta !=0 ) {
+                            InOut.MsgDeInformacao("Aposta", "A Aposta do jogo " + a.getIdAposta() + " foi vencida, seu saldo atual é " + this.credito.getSaldo());
+                        } else
+                            InOut.MsgDeInformacao("Aposta", "A Aposta do jogo " + a.getIdAposta() + " foi perdida, seu saldo atual é " + this.credito.getSaldo());
 
                     }
                     minhasApostas.clear();
-                 break;
+                    break;
                 case 5:
                     int id_remove = InOut.leInt("Insira o id do jogo que você quer remover");
-                    for(Aposta a : minhasApostas){
-                        if(a.getIdAposta() == id_remove){
+                    for (Aposta a : minhasApostas) {
+                        if (a.getIdAposta() == id_remove) {
                             a.excluirAposta(id_remove);
                             minhasApostas.remove(a);
                         }
                     }
+                    break;
                 case 6:
-                    InOut.MsgDeInformacao("Usuario","Nome: "+this.nome+" "+this.sobrenome+"\nApelido: "+this.apelido+"\nSaldo: "+credito.getSaldo()+"\nCPF: "+this.cpf+"\nNacionalidade: "+this.nacionalidade);
+                    InOut.MsgDeInformacao("Usuario", "Nome: " + this.nome + " " + this.sobrenome + "\nApelido: " + this.apelido + "\nSaldo: " + credito.getSaldo() + "\nCPF: " + this.cpf + "\nNacionalidade: " + this.nacionalidade);
+                    break;
+                case 7:
+                    loop = false;
+                    break;
+
+                default:
+                    InOut.MsgDeAviso("Aviso", "Opcao invalida");
+
             }
+
 
         }
     }
-    public void cadastrar(){
+
+    public void cadastrar() {
         this.idJogador = contadorId++;
         this.nome = InOut.leString("Insira seu nome");
         this.sobrenome = InOut.leString("Insira seu sobrenome");
-        this.apelido= InOut.leString("Insira seu apelido");
-        this.cpf =  InOut.leString("Insira seu cpf");
+        this.apelido = InOut.leString("Insira seu apelido");
+        this.cpf = InOut.leString("Insira seu cpf");
         this.nacionalidade = InOut.leString("Insira sua nacionalidade");
         this.dataNascimento = InOut.leString("Insira sua data de nascimento");
-        InOut.MsgDeInformacao("Credito","Seu credito inicial é 500");
+        InOut.MsgDeInformacao("Credito", "Seu credito inicial é 500");
     }
-    
-    
+
+
     public Jogador() {
         this.idJogador = contadorId++;
     }
 
-    public Aposta getListaDeApostas() {
-        return listaDeApostas;
-    }
 
     public void setListaDeApostas(Aposta listaDeApostas) {
         this.listaDeApostas = listaDeApostas;

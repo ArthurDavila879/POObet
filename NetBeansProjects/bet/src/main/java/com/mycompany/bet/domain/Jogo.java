@@ -14,34 +14,35 @@ public class Jogo {
     String descritivo;
     double apostaMax;
     double premioMax;
-    double odd = 2;
+    double odd;
     
 public static List<Jogo> jogos = List.of(
-    new Jogo(1,"Flamengo vai ganhar do Palmeiras?", 500, 2500),
-    new Jogo(2,"Lakers vai ganhar do Warriors?", 300, 1800),
-    new Jogo(3,"FURIA vai ganhar da NAVI (CS2)?", 200, 1500),
-    new Jogo(4,"Max Verstappen vai ganhar o GP do Brasil?", 400, 3000),
-    new Jogo(5,"Real Madrid vai ganhar do Manchester City?", 600, 3500)
+    new Jogo(1,"Flamengo vai ganhar do Palmeiras?", 500, 2500,5),
+    new Jogo(2,"Lakers vai ganhar do Warriors?", 300, 1800,6),
+    new Jogo(3,"FURIA vai ganhar da NAVI (CS2)?", 200, 1500,7.5),
+    new Jogo(4,"Max Verstappen vai ganhar o GP do Brasil?", 400, 3000,7.5),
+    new Jogo(5,"Real Madrid vai ganhar do Manchester City?", 600, 3500,5.8)
 );
 
 
     public Jogo(){}
     
-    public Jogo(int idJogo, String descritivo, double apostaMax, double premioMax){
+    public Jogo(int idJogo, String descritivo, double apostaMax, double premioMax,double odd){
         this.idJogo = idJogo;
         this.descritivo = descritivo;
         this.apostaMax = apostaMax;
         this.premioMax = premioMax;
+        this.odd = odd;
     }
 
     public void imprimirJogos(){
         for (Jogo j: jogos){
-            InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax);
+            InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax+"\nODD: "+j.odd);
 
         }
     }
     public void imprimirJogo(Jogo j){
-        InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax);
+        InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax+"\nODD: "+j.odd);
     }
     
 public int resultado(){
