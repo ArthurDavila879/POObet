@@ -57,15 +57,15 @@ public class Aposta {
         InOut.MsgDeInformacao("Aviso","Aposta excluida");
     }
 
-  public double resultadoDaAposta(){
-        for (Jogo j: jogosApostados){
-            if (j.resultado() ==1){
-                return j.odd;
+    public double resultadoDaAposta() {
+        for (Jogo j : jogosApostados) {
+            boolean ganhou = j.resultado(); // salva o sorteio
+            if (ganhou) {
+                return j.getOdd();
             }
-
         }
-      return 0;
-  }
+        return 0;
+    }
 
 
 

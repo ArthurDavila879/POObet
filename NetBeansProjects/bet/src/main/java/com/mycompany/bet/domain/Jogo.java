@@ -10,11 +10,11 @@ import java.util.Random;
 
 
 public class Jogo {
-    int idJogo;
-    String descritivo;
-    double apostaMax;
-    double premioMax;
-    double odd;
+    private int idJogo;
+    private String descritivo;
+    private double apostaMax;
+    private double premioMax;
+    private double odd;
     
 public static List<Jogo> jogos = List.of(
     new Jogo(1,"Flamengo vai ganhar do Palmeiras?", 500, 2500,5),
@@ -35,35 +35,36 @@ public static List<Jogo> jogos = List.of(
         this.odd = odd;
     }
 
-    public void imprimirJogos(){
+    public static void imprimirJogos(){
         for (Jogo j: jogos){
             InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax+"\nODD: "+j.odd);
 
         }
     }
-    public void imprimirJogo(Jogo j){
+    public static void imprimirJogo(Jogo j){
         InOut.MsgDeInformacao("Jogos","ID: "+j.idJogo+"\nDescrição: "+j.descritivo+"\nAposta maxima: "+j.apostaMax+"\nPremio maximo: "+j.premioMax+"\nODD: "+j.odd);
     }
-    
-public int resultado(){
-    Random random = new Random();
-    boolean resultado;
-    resultado = random.nextBoolean();
-    
-    if(resultado){
-        return 1;
-    }
-    return 0;
-}
-    public Jogo getJogoById(int id) {
-        return jogos.get(id-1);
 
+    public boolean resultado() {
+        return new Random().nextBoolean();
     }
+
+    public static Jogo getJogoById(int id) {
+        return jogos.stream()
+                .filter(j -> j.getIdJogo() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
     public int getIdJogo() {
         return idJogo;
     }
 
     public double getApostaMax() {
         return apostaMax;
+    }
+
+    public double getOdd() {
+        return odd;
     }
 }

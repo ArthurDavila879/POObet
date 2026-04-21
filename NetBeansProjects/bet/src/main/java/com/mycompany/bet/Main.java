@@ -14,11 +14,8 @@ public class Main {
 
         Jogador jogador = new Jogador();
         Aposta aposta = new Aposta();
-        Jogo jogo = new Jogo();
         Credito credito = new Credito();
 
-        jogador.setListaDeApostas(aposta);
-        aposta.setJogo(jogo);
         jogador.setCredito(credito);
 
       jogador.cadastrar();
