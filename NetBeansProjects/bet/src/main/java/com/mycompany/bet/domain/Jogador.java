@@ -19,7 +19,6 @@ public class Jogador {
     private String nacionalidade;
     private String dataNascimento;
     private Credito credito;
-    public Aposta listaDeApostas;
     public List<Aposta> minhasApostas = new ArrayList<>();
 
     public void menu() {
@@ -37,13 +36,21 @@ public class Jogador {
             switch (opcao) {
                 case 1:
 
-                    listaDeApostas.consultarJogos();
+                    Jogo.imprimirJogos();
                     break;
 
                 case 2:
                     int id = InOut.leInt("Insira o id do jogo");
-                    int valor = InOut.leInt("Insira o valor da aposta");
-                    if (!credito.isBloqueado() && valor <= credito.getSaldo() && valor <= listaDeApostas.getJogo(id).getApostaMax()) {
+                    double valor = InOut.leDouble("Insira o valor da aposta");
+
+                    Jogo jogoEscolhido = Jogo.getJogoById(id);
+
+                    if (jogoEscolhido == null) {
+                        InOut.MsgDeAviso("Erro", "Jogo não encontrado");
+                        break;
+                    }
+
+                    if (!credito.isBloqueado() && valor <= credito.getSaldo() && valor <=  jogoEscolhido.getApostaMax()) {
                         credito.setSaldo(credito.getSaldo() - valor);
                         Aposta apostado = new Aposta(true, valor, 1);
                         apostado.apostarJogo(id);
@@ -51,11 +58,13 @@ public class Jogador {
                         break;
                     } else InOut.MsgDeAviso("Erro", "Aposta invalida");
                     break;
+
                 case 3:
                     for (Aposta a : minhasApostas) {
                         a.verApostas();
                     }
                     break;
+
                 case 4:
                     for (Aposta a : minhasApostas) {
                         double resultadoDaAposta = a.resultadoDaAposta();
@@ -68,18 +77,16 @@ public class Jogador {
                     }
                     minhasApostas.clear();
                     break;
+
                 case 5:
                     int id_remove = InOut.leInt("Insira o id do jogo que você quer remover");
-                    for (Aposta a : minhasApostas) {
-                        if (a.getIdAposta() == id_remove) {
-                            a.excluirAposta(id_remove);
-                            minhasApostas.remove(a);
-                        }
-                    }
+                    minhasApostas.removeIf(a -> a.getIdAposta() == id_remove);
                     break;
+
                 case 6:
                     InOut.MsgDeInformacao("Usuario", "Nome: " + this.nome + " " + this.sobrenome + "\nApelido: " + this.apelido + "\nSaldo: " + credito.getSaldo() + "\nCPF: " + this.cpf + "\nNacionalidade: " + this.nacionalidade);
                     break;
+
                 case 7:
                     loop = false;
                     break;
@@ -110,9 +117,6 @@ public class Jogador {
     }
 
 
-    public void setListaDeApostas(Aposta listaDeApostas) {
-        this.listaDeApostas = listaDeApostas;
-    }
 
     public void setCredito(Credito credito) {
         this.credito = credito;
