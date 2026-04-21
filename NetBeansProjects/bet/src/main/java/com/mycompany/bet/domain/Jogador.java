@@ -80,11 +80,13 @@ public class Jogador {
 
                 case 5:
                     int id_remove = InOut.leInt("Insira o id do jogo que você quer remover");
+                    minhasApostas.get(id_remove).excluirAposta(id_remove);
                     minhasApostas.removeIf(a -> a.getIdAposta() == id_remove);
+
                     break;
 
                 case 6:
-                    InOut.MsgDeInformacao("Usuario", "Nome: " + this.nome + " " + this.sobrenome + "\nApelido: " + this.apelido + "\nSaldo: " + credito.getSaldo() + "\nCPF: " + this.cpf + "\nNacionalidade: " + this.nacionalidade);
+                    InOut.MsgDeInformacao("Usuário", "Nome: " + this.nome + " " + this.sobrenome + "\nApelido: " + this.apelido + "\nSaldo: " + credito.getSaldo() + "\nCPF: " + this.cpf + "\nNacionalidade: " + this.nacionalidade);
                     break;
 
                 case 7:

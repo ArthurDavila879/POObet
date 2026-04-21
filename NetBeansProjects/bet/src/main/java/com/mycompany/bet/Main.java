@@ -4,16 +4,13 @@
  */
 package com.mycompany.bet;
 
-import com.mycompany.bet.domain.Aposta;
 import com.mycompany.bet.domain.Credito;
 import com.mycompany.bet.domain.Jogador;
-import com.mycompany.bet.domain.Jogo;
 
 public class Main {
     public static void main(String[] args) {
 
         Jogador jogador = new Jogador();
-        Aposta aposta = new Aposta();
         Credito credito = new Credito();
 
         jogador.setCredito(credito);
