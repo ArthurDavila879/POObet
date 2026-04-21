@@ -113,7 +113,6 @@ public class Jogador {
 
 
     public Jogador() {
-        this.idJogador = contadorId++;
     }
 
 

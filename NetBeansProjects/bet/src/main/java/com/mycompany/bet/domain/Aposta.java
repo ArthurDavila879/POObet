@@ -18,8 +18,6 @@ public class Aposta {
     private boolean confirmado;
     private double valorAposta;
     private int repetir;
-    private Jogo jogo;
-
     public List<Jogo> jogosApostados = new ArrayList<>();
 
     public Aposta() {
@@ -48,9 +46,7 @@ public class Aposta {
         InOut.MsgDeInformacao("Aposta","Valor apostado: " +this.valorAposta);
     }
     
-    public void consultarJogos(){
-    jogo.imprimirJogos();
-}
+
 
     public void excluirAposta(int idjogo){
         jogosApostados.removeIf(jogo -> jogo.getIdJogo() == idjogo);
@@ -59,7 +55,7 @@ public class Aposta {
 
     public double resultadoDaAposta() {
         for (Jogo j : jogosApostados) {
-            boolean ganhou = j.resultado(); // salva o sorteio
+            boolean ganhou = j.resultado();
             if (ganhou) {
                 return j.getOdd();
             }
@@ -69,9 +65,6 @@ public class Aposta {
 
 
 
-    public void setJogo(Jogo jogo) {
-        this.jogo = jogo;
-    }
 
     public double getValorAposta() {
         return valorAposta;
@@ -81,8 +74,6 @@ public class Aposta {
         return idAposta;
     }
 
-    public Jogo getJogo(int id) {
-       return jogo.getJogoById(id);
-    }
+
 
 }
