@@ -12,7 +12,6 @@ public class Main {
 
         Jogador jogador = new Jogador();
         Credito credito = new Credito();
-
         jogador.setCredito(credito);
 
       jogador.cadastrar();

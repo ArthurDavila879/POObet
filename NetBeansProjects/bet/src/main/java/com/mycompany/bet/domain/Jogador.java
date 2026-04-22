@@ -67,7 +67,7 @@ public class Jogador {
 
                 case 4:
                     for (Aposta a : minhasApostas) {
-                        double resultadoDaAposta = a.resultadoDaAposta();
+                        double resultadoDaAposta = a.resultadoDaAposta(a);
                         this.credito.setSaldo(this.credito.getSaldo() + (resultadoDaAposta * a.getValorAposta()));
                         if (resultadoDaAposta !=0 ) {
                             InOut.MsgDeInformacao("Aposta", "A Aposta do jogo " + a.getIdAposta() + " foi vencida, seu saldo atual é " + this.credito.getSaldo());
@@ -80,8 +80,15 @@ public class Jogador {
 
                 case 5:
                     int id_remove = InOut.leInt("Insira o id do jogo que você quer remover");
-                    minhasApostas.get(id_remove).excluirAposta(id_remove);
-                    minhasApostas.removeIf(a -> a.getIdAposta() == id_remove);
+
+                    try {
+                        this.credito.setSaldo(credito.getSaldo() + minhasApostas.get(id_remove-1).getValorAposta());
+                        minhasApostas.get(id_remove-1).excluirAposta(id_remove);
+                        minhasApostas.removeIf(a -> a.getIdAposta() == id_remove);
+                    }catch (Exception e){
+                        InOut.MsgDeErro("Erro","Erro, index nao existe ");
+                    }
+
 
                     break;
 

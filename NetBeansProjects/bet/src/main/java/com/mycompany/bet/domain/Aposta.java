@@ -29,41 +29,42 @@ public class Aposta {
         this.valorAposta = valorAposta;
         this.repetir = repetir;
     }
-    
-    public void apostarJogo(int idJogo){
 
-        for (Jogo j: Jogo.jogos){
-            if (j.getIdJogo()== idJogo){
-               jogosApostados.add(j);
-               InOut.MsgDeAviso("Aviso","Jogo apostado");
+    public void apostarJogo(int idJogo) {
+
+        for (Jogo j : Jogo.jogos) {
+            if (j.getIdJogo() == idJogo) {
+                jogosApostados.add(j);
+                InOut.MsgDeAviso("Aviso", "Jogo apostado");
             }
         }
     }
-    public void verApostas(){
-        for (Jogo j: jogosApostados){
-            j.imprimirJogo(j);
-        }
-        InOut.MsgDeInformacao("Aposta","Valor apostado: " +this.valorAposta);
-    }
-    
 
-
-    public void excluirAposta(int idjogo){
-        jogosApostados.removeIf(jogo -> jogo.getIdJogo() == idjogo);
-        InOut.MsgDeInformacao("Aviso","Aposta excluida");
-    }
-
-    public double resultadoDaAposta() {
+    public void verApostas() {
         for (Jogo j : jogosApostados) {
-            boolean ganhou = j.resultado();
-            if (ganhou) {
-                return j.getOdd();
-            }
+            j.imprimirJogo(j);
+            InOut.MsgDeInformacao("Aposta", "Valor apostado: " + this.valorAposta);
         }
-        return 0;
+
     }
 
 
+    public void excluirAposta(int idjogo) {
+        jogosApostados.removeIf(jogo -> jogo.getIdJogo() == idjogo);
+        InOut.MsgDeInformacao("Aviso", "Aposta excluida");
+        contadorId -= 1;
+
+    }
+
+    public double resultadoDaAposta(Aposta a) {
+        Jogo j = a.jogosApostados.getFirst();
+        boolean ganhou = j.resultado();
+        double odd = 0;
+        if (ganhou) {
+            odd = j.getOdd();
+        }
+        return odd;
+    }
 
 
     public double getValorAposta() {
@@ -73,7 +74,6 @@ public class Aposta {
     public int getIdAposta() {
         return idAposta;
     }
-
 
 
 }
